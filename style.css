@@ -57,8 +57,10 @@ body {
 }
 
 .obstacle {
+  width: 30px;
+  height: 60px;
+  background-image: url("tree.png");
+  background-size: cover;
   position: absolute;
   bottom: 0;
-  background-color: #446622;
-  border-radius: 3px;
 }
