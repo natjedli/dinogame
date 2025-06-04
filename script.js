@@ -14,18 +14,23 @@ let gameOver = false;
 function jump() {
   if (isJumping) return;
   isJumping = true;
-  velocity = 18;
 
-  const jumpInterval = setInterval(() => {
-    dinoBottom += velocity;
-    velocity -= gravity;
-    if (dinoBottom <= 0) {
-      dinoBottom = 0;
-      isJumping = false;
-      clearInterval(jumpInterval);
-    }
-    dino.style.bottom = dinoBottom + "px";
-  }, 20);
+  dinoBottom += 80; // malý rychlý výskok
+  dino.style.bottom = dinoBottom + "px";
+
+  setTimeout(() => {
+    let downInterval = setInterval(() => {
+      if (dinoBottom <= 0) {
+        dinoBottom = 0;
+        dino.style.bottom = dinoBottom + "px";
+        isJumping = false;
+        clearInterval(downInterval);
+      } else {
+        dinoBottom -= 10;
+        dino.style.bottom = dinoBottom + "px";
+      }
+    }, 20);
+  }, 50); // krátká pauza ve vzduchu
 }
 
 document.addEventListener("keydown", (e) => {
