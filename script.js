@@ -12,7 +12,7 @@ function jump() {
   if (isJumping) return;
   isJumping = true;
 
-  let jumpPeak = dinoBottom + 80;
+  let jumpPeak = dinoBottom + 120;
   let upInterval = setInterval(() => {
     if (dinoBottom >= jumpPeak) {
       clearInterval(upInterval);
@@ -25,15 +25,20 @@ function jump() {
           clearInterval(downInterval);
           isJumping = false;
         } else {
-          dinoBottom -= 10;
+          dinoBottom -= 14;
           dino.style.bottom = dinoBottom + "px";
         }
-      }, 20);
+      }, 10);
     } else {
-      dinoBottom += 10;
+      dinoBottom += 14;
       dino.style.bottom = dinoBottom + "px";
     }
-  }, 20);
+  }, 10);
+     } else {
+      dinoBottom += 14;
+      dino.style.bottom = dinoBottom + "px";
+    }
+  }, 10);
 }
 
 document.addEventListener("keydown", (e) => {
