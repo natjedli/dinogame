@@ -53,6 +53,7 @@ function createObstacle() {
 
   let obstacleLeft = window.innerWidth;
   obstacle.style.left = obstacleLeft + "px";
+  obstacle.style.bottom= 0px
   gameContainer.appendChild(obstacle);
 
   let moveInterval = setInterval(() => {
