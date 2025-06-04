@@ -4,36 +4,27 @@ const scoreDisplay = document.getElementById("score");
 
 let isJumping = false;
 let dinoBottom = 0;
-let gravity = 0.9;
+let velocity = 0;
+let gravity = 1;
 let score = 0;
 let speed = 5;
 let gameOver = false;
 
+// zrychlené a plynulé skákání
 function jump() {
   if (isJumping) return;
   isJumping = true;
-  let velocity = 20;
-  
-  let upInterval = setInterval(() => {
-    if (velocity <= 0) {
-      clearInterval(upInterval);
-      let downInterval = setInterval(() => {
-        if (dinoBottom <= 0) {
-          clearInterval(downInterval);
-          dinoBottom = 0;
-          dino.style.bottom = dinoBottom + "px";
-          isJumping = false;
-        } else {
-          velocity -= 1;
-          dinoBottom -= velocity;
-          dino.style.bottom = dinoBottom + "px";
-        }
-      }, 20);
-    } else {
-      dinoBottom += velocity;
-      velocity -= 1;
-      dino.style.bottom = dinoBottom + "px";
+  velocity = 18;
+
+  const jumpInterval = setInterval(() => {
+    dinoBottom += velocity;
+    velocity -= gravity;
+    if (dinoBottom <= 0) {
+      dinoBottom = 0;
+      isJumping = false;
+      clearInterval(jumpInterval);
     }
+    dino.style.bottom = dinoBottom + "px";
   }, 20);
 }
 
@@ -47,6 +38,7 @@ function createObstacle() {
   const obstacle = document.createElement("div");
   obstacle.classList.add("obstacle");
 
+  // náhodná velikost stromu
   let height = 30 + Math.random() * 50;
   let width = 20 + Math.random() * 30;
   obstacle.style.height = height + "px";
@@ -65,33 +57,29 @@ function createObstacle() {
     obstacleLeft -= speed;
     obstacle.style.left = obstacleLeft + "px";
 
-    // Collision detection
+    // kolize
     if (
       obstacleLeft < 100 &&
       obstacleLeft + width > 50 &&
       dinoBottom < height
     ) {
       clearInterval(moveInterval);
-      alert("💥 GAME OVER! Tvoje skóre: " + score);
       gameOver = true;
+      alert("💥 GAME OVER! Tvoje skóre: " + score);
       location.reload();
     }
 
+    // odstranění a skóre
     if (obstacleLeft < -width) {
       clearInterval(moveInterval);
       gameContainer.removeChild(obstacle);
       score++;
       scoreDisplay.innerText = "Skóre: " + score;
-
-      // zrychlení každých 3 překážky
-      if (score % 3 === 0 && speed < 20) {
-        speed += 0.5;
-      }
+      if (score % 3 === 0 && speed < 20) speed += 0.5;
     }
   }, 20);
 }
 
-// Začne házet stromy
 setInterval(() => {
   if (!gameOver) createObstacle();
 }, 1500);
