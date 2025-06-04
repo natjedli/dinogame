@@ -15,22 +15,28 @@ function jump() {
   if (isJumping) return;
   isJumping = true;
 
-  dinoBottom += 80; // malý rychlý výskok
-  dino.style.bottom = dinoBottom + "px";
+  let jumpPeak = dinoBottom + 80; // skočí o 80px nahoru
+  let upInterval = setInterval(() => {
+    if (dinoBottom >= jumpPeak) {
+      clearInterval(upInterval);
 
-  setTimeout(() => {
-    let downInterval = setInterval(() => {
-      if (dinoBottom <= 0) {
-        dinoBottom = 0;
-        dino.style.bottom = dinoBottom + "px";
-        isJumping = false;
-        clearInterval(downInterval);
-      } else {
-        dinoBottom -= 10;
-        dino.style.bottom = dinoBottom + "px";
-      }
-    }, 20);
-  }, 50); // krátká pauza ve vzduchu
+      // Padání
+      let downInterval = setInterval(() => {
+        if (dinoBottom <= 0) {
+          dinoBottom = 0;
+          dino.style.bottom = dinoBottom + "px";
+          clearInterval(downInterval);
+          isJumping = false;
+        } else {
+          dinoBottom -= 10;
+          dino.style.bottom = dinoBottom + "px";
+        }
+      }, 20);
+    } else {
+      dinoBottom += 10;
+      dino.style.bottom = dinoBottom + "px";
+    }
+  }, 20);
 }
 
 document.addEventListener("keydown", (e) => {
