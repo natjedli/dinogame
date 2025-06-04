@@ -51,8 +51,8 @@ function createObstacle() {
   const obstacle = document.createElement("div");
   obstacle.classList.add("obstacle");
 
-  let height = 30 + Math.random() * 50;
-  let width = 20 + Math.random() * 30;
+  let height = 20 + Math.random() * 15;
+  let width = 10 + Math.random() * 5;
   obstacle.style.height = height + "px";
   obstacle.style.width = width + "px";
 
