@@ -12,7 +12,7 @@ function jump() {
   if (isJumping) return;
   isJumping = true;
 
-  let jumpPeak = dinoBottom + 160;
+  let jumpPeak = dinoBottom + 120;
   let upInterval = setInterval(() => {
     if (dinoBottom >= jumpPeak) {
       clearInterval(upInterval);
@@ -55,7 +55,8 @@ function createObstacle() {
   let width = 20 + Math.random() * 10;
   obstacle.style.height = height + "px";
   obstacle.style.width = width + "px";
-  obstacle.style.bottom = 0px
+  obstacle.style.bottom = "0px";
+  obstacle.style.backgroundColor = "green";
 
   let obstacleLeft = window.innerWidth;
   obstacle.style.left = obstacleLeft + "px";
