@@ -59,7 +59,6 @@ body {
 .obstacle {
   width: 30px;
   height: 60px;
-  background-image: url("tree.png");
   background-size: green;
   position: absolute;
   bottom: 0;
