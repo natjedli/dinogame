@@ -64,11 +64,13 @@ function createObstacle() {
     obstacleLeft -= speed;
     obstacle.style.left = obstacleLeft + "px";
 
-    if (
-      obstacleLeft < 100 &&
-      obstacleLeft + width > 50 &&
-      dinoBottom < height
-    ) {
+    const dinoTop = dinoBottom + 50; // výška dinosaura (box má 50px)
+
+if (
+  obstacleLeft < 100 &&
+  obstacleLeft + width > 50 &&
+  dinoBottom < height
+) {
       clearInterval(moveInterval);
       gameOver = true;
       alert("💥 GAME OVER! Skóre: " + score);
