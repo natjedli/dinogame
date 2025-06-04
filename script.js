@@ -92,4 +92,4 @@ if (isColliding) {
 
 setInterval(() => {
   if (!gameOver) createObstacle();
-}, 1500);
+}, 1500); 
