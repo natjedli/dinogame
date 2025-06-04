@@ -12,7 +12,7 @@ function jump() {
   if (isJumping) return;
   isJumping = true;
 
-  let jumpPeak = dinoBottom + 80;
+  let jumpPeak = dinoBottom + 120;
   let upInterval = setInterval(() => {
     if (dinoBottom >= jumpPeak) {
       clearInterval(upInterval);
