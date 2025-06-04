@@ -64,14 +64,16 @@ function createObstacle() {
     obstacleLeft -= speed;
     obstacle.style.left = obstacleLeft + "px";
 
-    const dinoRect = dino.getBoundingClientRect();
+const dinoRect = dino.getBoundingClientRect();
 const obstacleRect = obstacle.getBoundingClientRect();
 
-if (
-  dinoRect.left < obstacleRect.right &&
+const isColliding =
   dinoRect.right > obstacleRect.left &&
-  dinoRect.bottom > obstacleRect.top
-) {
+  dinoRect.left < obstacleRect.right &&
+  dinoRect.bottom > obstacleRect.top &&
+  dinoRect.top < obstacleRect.bottom;
+
+if (isColliding) {
   clearInterval(moveInterval);
   gameOver = true;
   alert("💥 GAME OVER! Skóre: " + score);
