@@ -64,18 +64,19 @@ function createObstacle() {
     obstacleLeft -= speed;
     obstacle.style.left = obstacleLeft + "px";
 
-    const dinoTop = dinoBottom + 50; // výška dinosaura (box má 50px)
+    const dinoRect = dino.getBoundingClientRect();
+const obstacleRect = obstacle.getBoundingClientRect();
 
 if (
-  obstacleLeft < 100 &&
-  obstacleLeft + width > 50 &&
-  dinoBottom < height
+  dinoRect.left < obstacleRect.right &&
+  dinoRect.right > obstacleRect.left &&
+  dinoRect.bottom > obstacleRect.top
 ) {
-      clearInterval(moveInterval);
-      gameOver = true;
-      alert("💥 GAME OVER! Skóre: " + score);
-      location.reload();
-    }
+  clearInterval(moveInterval);
+  gameOver = true;
+  alert("💥 GAME OVER! Skóre: " + score);
+  location.reload();
+}
 
     if (obstacleLeft < -width) {
       clearInterval(moveInterval);
